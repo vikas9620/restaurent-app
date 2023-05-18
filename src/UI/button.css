@@ -1,0 +1,13 @@
+.btn {display: flex;
+    flex-direction: row;
+   margin: 15px;
+  background-color: #793102;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  padding-top: 12px;
+}
+.btn:hover {
+    background-color: #945b06;
+  }
