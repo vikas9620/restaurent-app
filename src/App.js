@@ -1,22 +1,17 @@
-import React from "react";
+import React, {Fragment} from "react";
 import "./App.css";
-import Button from "./UI/Button";
+import Header from "./components/Layout/Header";
+import Meals from "./components/Meal/Meals";
 
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function App() {
   return (
-    <React.Fragment>
-      <div className="app-head">
-        <h2>ReactMeals</h2>
-        <Button>
-          <FontAwesomeIcon icon={faShoppingCart} />
-          Your Cart<div className="count">0</div>
-        </Button>
-      </div>
-      <img src="/image.png" alt="Logo of my restaurant"  />
-    </React.Fragment>
+    <Fragment>
+      <Header />
+      <main>
+      <Meals />
+      </main>
+    </Fragment>
   );
 }
 
