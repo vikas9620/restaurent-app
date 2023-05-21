@@ -3,7 +3,7 @@ import CartContext from "./cart-context";
 
 const CartProvider = (props) => {
   const [cartItems, setCartItems] = useState([]);
-  
+
   const addItemToCartHandler = (item) => {
     setCartItems((prevCartItems) => {
       const existingCartItemIndex = prevCartItems.findIndex(
@@ -20,12 +20,31 @@ const CartProvider = (props) => {
         updatedCartItems[existingCartItemIndex] = updatedCartItem;
         return updatedCartItems;
       } else {
-        return [...prevCartItems, item];
+        const itemWithDetails = {
+          ...item,
+          name: item.name,
+          price: item.price,
+        };
+        return [...prevCartItems, itemWithDetails];
       }
     });
   };
 
-  const removeItemFromCartHandler = (id) => {};
+  const removeItemFromCartHandler = (id) => {
+    setCartItems((prevCartItems) => {
+      // Find the index of the item to be removed
+      const itemIndex = prevCartItems.findIndex((item) => item.id === id);
+
+      if (itemIndex !== -1) {
+        // Remove the item from the cart
+        const updatedCartItems = [...prevCartItems];
+        updatedCartItems.splice(itemIndex, 1);
+        return updatedCartItems;
+      }
+
+      return prevCartItems;
+    });
+  };
   const cartContext = {
     items: cartItems,
     totalAmount: 0,
