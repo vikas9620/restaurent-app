@@ -32,19 +32,20 @@ const CartProvider = (props) => {
 
   const removeItemFromCartHandler = (id) => {
     setCartItems((prevCartItems) => {
-      // Find the index of the item to be removed
-      const itemIndex = prevCartItems.findIndex((item) => item.id === id);
-
-      if (itemIndex !== -1) {
-        // Remove the item from the cart
-        const updatedCartItems = [...prevCartItems];
-        updatedCartItems.splice(itemIndex, 1);
-        return updatedCartItems;
-      }
-
-      return prevCartItems;
+      const updatedCartItems = prevCartItems.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            amount: item.amount - 1,
+          };
+        }
+        return item;
+      });
+  
+      return updatedCartItems.filter((item) => item.amount > 0);
     });
   };
+  
   const cartContext = {
     items: cartItems,
     totalAmount: 0,
